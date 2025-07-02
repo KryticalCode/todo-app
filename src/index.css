@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+* {
+  font-family: Inter;
+}
+
+/* @media is used to apply styles based on the viewport size
+   - when max-height is 950px, the h1 (of all pages in this context) will have a top margin of 5%
+   meaning it will be positioned 5% from the top of the viewport.  
+   */
+@media (max-height: 950px) {
+  h1 {
+    top: 5%;
+  }
+}
+
+@media (max-height: 916px) {
+  h1 {
+    top: 3.5%;
+  }
+}
+
+@media (max-height: 883px) {
+  h1 {
+    top: 2.5%;
+  }
+}
+
+@media (max-height: 850px) {
+  h1 {
+    top: 0%;
+  }
+}
