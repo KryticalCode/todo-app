@@ -1,7 +1,7 @@
 import BackgroundHeading from "./BackgroundHeading.tsx";
 import Footer from "./Footer.tsx";
 import Header from "./Header.tsx";
-import Sidebar from "./Sidebar.ts";
+import Sidebar from "./Sidebar.tsx";
 import TodoList from "./TodoList.tsx";
 
 function App() {
