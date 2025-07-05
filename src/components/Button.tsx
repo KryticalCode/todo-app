@@ -1,15 +1,16 @@
-export default function Button(props) {
-  console.log(props);
-  console.log(props.buttonType);
-
+export default function Button({ buttonType, children }) {
+  // Destructuring props to access buttonType directly e.g., instead of props.buttonType => buttonType
+  // console.log(props);
+  // console.log(props.buttonType);
   return (
     <button
       className={`h-[45px] bg-[#473a2b] hover:bg-[#322618] w-full
      text-white rounded-[5px] cursor-pointer ${
-       props.buttonType === "secondary" ? "opacity-[85%]" : ""
+       buttonType === "secondary" ? "opacity-[85%]" : ""
      }`}
     >
-      {props.children} {/* Accesing a property of the props object */}
+      {children}
+      {/* Accesing a property of the props object by deconstructing the props object */}
     </button>
   );
 }
