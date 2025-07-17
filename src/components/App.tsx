@@ -6,24 +6,7 @@ import Sidebar from "./Sidebar.tsx";
 import TodoList from "./TodoList.tsx";
 
 function App() {
-  const [todos, setTodos] = useState([
-    // when useState is called, it will re-render the whole component below
-    {
-      id: 1,
-      text: "buy groceries",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      text: "walk the dog",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      text: "do laundry",
-      isCompleted: true,
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   return (
     <div className="flex justify-center items-center flex-col font-inter bg-[#f1d4b3] min-h-screen">
@@ -34,7 +17,7 @@ function App() {
 
         <TodoList todos={todos} setTodos={setTodos} />
 
-        <Sidebar />
+        <Sidebar todos={todos} setTodos={setTodos} />
       </main>
 
       <Footer />
