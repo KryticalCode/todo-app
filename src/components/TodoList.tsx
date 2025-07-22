@@ -2,16 +2,13 @@ import DeleteButton from "./DeleteButton";
 
 /* Declaring outside the component to avoid re-creating it on every render, instead of inside the component
     which would cause the array to be re-created on every render, affecting performance. */
-export default function TodoList({ todos, setTodos }) {
+export default function TodoList({
+  todos,
+  handleToggleTodo,
+  handleDeleteTodo,
+}) {
   const handleClick = () => {
-    setTodos(
-      todos.map((t) => {
-        if (t.id === todo.id) {
-          return { ...t, isCompleted: !t.isCompleted }; // Toggle isCompleted to opposite value
-        }
-        return t; // else return the todo unchanged
-      })
-    );
+    handleToggleTodo(todos.id);
   };
 
   // const totalNumberOfTodos = todos.length;
@@ -37,7 +34,7 @@ export default function TodoList({ todos, setTodos }) {
           >
             {todo.text}
           </span>
-          <DeleteButton id={todo.id} setTodos={setTodos} />
+          <DeleteButton id={todo.id} handleDeleteTodo={handleDeleteTodo} />
           {/* Passing setTodos as a prop
             to DeleteButton so it can access and modify the todos state in the
             parent component */}
