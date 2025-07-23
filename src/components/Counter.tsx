@@ -1,13 +1,7 @@
-type CounterProps = {
-  totalNumberOfTodos: number;
-  numberOfCompletedTodos: number;
-};
+import { useTodosContext } from "../lib/hooks";
 
-export default function Counter({
-  totalNumberOfTodos,
-  numberOfCompletedTodos,
-}: CounterProps) {
-  /* const [count, setCount] = useState(0); */
+export default function Counter() {
+  const { totalNumberOfTodos, numberOfCompletedTodos } = useTodosContext();
   return (
     <p>
       <b>{numberOfCompletedTodos}</b> /{totalNumberOfTodos} todos completed

@@ -1,21 +1,16 @@
 import DeleteButton from "./DeleteButton";
-import type { Todo } from "../lib/types";
+import { useTodosContext } from "../lib/hooks";
 
-type TodoListProps = {
-  todos: Todo[];
-  handleToggleTodo: (id: number) => void;
-  handleDeleteTodo: (id: number) => void;
-};
 /* Declaring outside the component to avoid re-creating it on every render, instead of inside the component
     which would cause the array to be re-created on every render, affecting performance. */
-export default function TodoList({
-  todos,
-  handleToggleTodo,
-  handleDeleteTodo,
-}: TodoListProps) {
+
+export default function TodoList() {
+  // Checking if the context is available as it also could be null if the context provider is not used
+  // If it is null, throw an error to indicate , else we destructure the context to get the todos and the functions to handle toggling
+  const { todos, handleToggleTodo, handleDeleteTodo } = useTodosContext();
+
   // const totalNumberOfTodos = todos.length;
   // console.log("Total number of todos:", totalNumberOfTodos);
-
   return (
     <ul>
       {todos.length === 0 && (
@@ -38,7 +33,7 @@ export default function TodoList({
           >
             {todo.text}
           </span>
-          <DeleteButton id={todo.id} handleDeleteTodo={handleDeleteTodo} />
+          <DeleteButton id={todo.id} onDeleteTodo={handleDeleteTodo} />
           {/* Passing setTodos as a prop
             to DeleteButton so it can access and modify the todos state in the
             parent component */}
