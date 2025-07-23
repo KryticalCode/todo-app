@@ -1,5 +1,5 @@
 type ButtonProps = {
-  onClick: () => Promise<void>;
+  onClick?: () => Promise<void>;
   buttonType?: "primary" | "secondary"; // Union type , only specify these two strings primary or secondary
   children: React.ReactNode; // Children prop of the button e.g., text inside the button
 };
