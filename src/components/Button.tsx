@@ -1,21 +1,23 @@
 type ButtonProps = {
+  onClick: () => Promise<void>;
   buttonType?: "primary" | "secondary"; // Union type , only specify these two strings primary or secondary
   children: React.ReactNode; // Children prop of the button e.g., text inside the button
 };
 
-export default function Button({ buttonType, children }: ButtonProps) {
+export default function Button({ onClick, buttonType, children }: ButtonProps) {
   // Destructuring props to access buttonType directly e.g., instead of props.buttonType => buttonType
   // console.log(props);
   // console.log(props.buttonType);
   return (
     <button
+      onClick={onClick}
       className={`h-[45px] bg-[#473a2b] hover:bg-[#322618] w-full
      text-white rounded-[5px] cursor-pointer ${
        buttonType === "secondary" ? "opacity-[85%]" : ""
      }`}
     >
       {children}
-      {/* Accesing a property of the props object by deconstructing the props object */}
+      {/* Accessing a property of the props object by deconstructing the props object */}
     </button>
   );
 }

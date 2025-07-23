@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import type { Todo } from "../lib/types";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 
 type TodosContextProviderProps = {
   children: React.ReactNode;
@@ -30,6 +31,8 @@ const getInitialTodos = () => {
 export default function TodosContextProvider({
   children,
 }: TodosContextProviderProps) {
+  const { isAuthenticated } = useKindeAuth(); // custom hook to access Kinde authentication state
+
   // state
   const [todos, setTodos] = useState<Todo[]>(getInitialTodos);
 
@@ -39,10 +42,9 @@ export default function TodosContextProvider({
     (todo) => todo.isCompleted
   ).length;
 
-  // event handlers / actions
-  // Good concept to name functions that are used to handle events by prefixing with 'handle'
+  // event handlers / actions       -> Good concept to name functions that are used to handle events by prefixing with 'handle'
   const handleAddTodo = (todoText: string) => {
-    if (todos.length >= 3) {
+    if (todos.length >= 3 && !isAuthenticated) {
       alert("You can only add up to 3 todos without creating an account.");
       return;
     } else {
