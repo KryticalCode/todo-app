@@ -1,16 +1,18 @@
 import DeleteButton from "./DeleteButton";
+import type { Todo } from "../lib/types";
 
+type TodoListProps = {
+  todos: Todo[];
+  handleToggleTodo: (id: number) => void;
+  handleDeleteTodo: (id: number) => void;
+};
 /* Declaring outside the component to avoid re-creating it on every render, instead of inside the component
     which would cause the array to be re-created on every render, affecting performance. */
 export default function TodoList({
   todos,
   handleToggleTodo,
   handleDeleteTodo,
-}) {
-  const handleClick = () => {
-    handleToggleTodo(todos.id);
-  };
-
+}: TodoListProps) {
   // const totalNumberOfTodos = todos.length;
   // console.log("Total number of todos:", totalNumberOfTodos);
 
@@ -27,7 +29,9 @@ export default function TodoList({
           key={todo.id}
           className="flex justify-between items-center px-8 h-[50px] text-[14px] 
           cursor-pointer border-black/[8%]"
-          onClick={handleClick}
+          onClick={() => {
+            handleToggleTodo(todo.id);
+          }}
         >
           <span
             className={`${todo.isCompleted ? "line-through text-[#ccc]" : ""}`}

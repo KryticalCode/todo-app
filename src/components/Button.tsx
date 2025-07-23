@@ -1,4 +1,9 @@
-export default function Button({ buttonType, children }) {
+type ButtonProps = {
+  buttonType?: "primary" | "secondary"; // Union type , only specify these two strings primary or secondary
+  children: React.ReactNode; // Children prop of the button e.g., text inside the button
+};
+
+export default function Button({ buttonType, children }: ButtonProps) {
   // Destructuring props to access buttonType directly e.g., instead of props.buttonType => buttonType
   // console.log(props);
   // console.log(props.buttonType);
