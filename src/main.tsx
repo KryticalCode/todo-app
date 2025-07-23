@@ -10,8 +10,16 @@ createRoot(document.getElementById("root")!).render(
     <KindeProvider
       clientId="a261b0de89d040c793d3dc9160552590"
       domain="https://kryticalcode.kinde.com"
-      redirectUri="http://localhost:5173"
-      logoutUri="http://localhost:5173"
+      redirectUri={
+        process.env.NODE_ENV === "production"
+          ? "https://todo-app-two-psi-89.vercel.app"
+          : "http://localhost:5173"
+      }
+      logoutUri={
+        process.env.NODE_ENV === "production"
+          ? "https://todo-app-two-psi-89.vercel.app"
+          : "http://localhost:5173"
+      }
     >
       <TodosContextProvider>
         <App />
