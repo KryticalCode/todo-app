@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import type { Todo } from "../lib/types";
 
 type TodosContextProviderProps = {
@@ -17,11 +17,21 @@ type TTodosContext = {
 };
 export const TodosContext = createContext<TTodosContext | null>(null);
 
+// getting the data from localStorage before the component mounts / setting the initial state
+const getInitialTodos = () => {
+  const savedTodos = localStorage.getItem("todos");
+  if (savedTodos) {
+    return JSON.parse(savedTodos); // parse the string back into an array of objects
+  } else {
+    return []; // if no todos are saved in localStorage, return an empty array on initialization
+  }
+};
+
 export default function TodosContextProvider({
   children,
 }: TodosContextProviderProps) {
   // state
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(getInitialTodos);
 
   // derived state
   const totalNumberOfTodos = todos.length; // derived from the length of the todos state array
@@ -61,6 +71,11 @@ export default function TodosContextProvider({
   const handleDeleteTodo = (id: number) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id)); // passes the 'prev' state to the function, which is the current state of todos, and filters out the todo with the specified id
   };
+
+  // side effects
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos)); // stringify as its an array of objects, localStorage only accepts strings
+  }, [todos]); // Runs whenever the todos array state changes, saving the current todos array to localStorage
 
   return (
     <TodosContext.Provider
